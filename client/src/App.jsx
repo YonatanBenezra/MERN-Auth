@@ -20,6 +20,7 @@ function App() {
         {blogs.map(() => {
 
         })}
+        <p>hi</p>
       </div>
     </>
   );
