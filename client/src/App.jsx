@@ -1,27 +1,16 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
-function App() {
-  const [blogs, setBlogs] = useState();
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/blogs")
-      .then((response) => {
-        setBlogs(response.data);
-      })
-      .catch((error) => {
-        console.log("error");
-      });
-  }, []);
 
+import { logout } from "./utils/authService";
+import Signup from "./components/SignUp";
+import Authenticate from "./components/UserData";
+import Login from "./components/login";
+function App() {
   return (
     <>
-      <div>
-        {blogs.map(() => {
-
-        })}
-        <p>hi</p>
-      </div>
+      <Login />
+      <Signup />
+      <Authenticate />
+      <button onClick={() => logout()}>Logout</button>
     </>
   );
 }

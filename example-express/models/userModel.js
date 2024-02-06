@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
+      default: "user",
     },
   },
   {
@@ -20,7 +21,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Create the Blog model using the schema
 const User = mongoose.model("User", userSchema);
 
-module.exports = user;
+module.exports = User;

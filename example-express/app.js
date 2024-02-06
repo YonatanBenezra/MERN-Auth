@@ -1,22 +1,28 @@
 const cors = require("cors");
-const express = require("express"); // Express.js web application framework
-const blogRoutes = require("./routes/blog"); // Routes for blog posts
+const express = require("express");
+const blogRoutes = require("./routes/blog");
+const userRoutes = require("./routes/user");
+const cookieParser = require("cookie-parser");
 
 const app = express();
+app.use(cookieParser());
 app.use(express.json());
-app.use(cors( ));
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true,
+};
 
-// Default route
+app.use(cors(corsOptions));
+
 app.get("/", (req, res) => {
   res.send("Hi!");
 });
 
 app.use("/api/blogs", blogRoutes);
+app.use("/api/users", userRoutes);
 
-// If no routes are matched, send a 404 error
 app.all("*", (req, res) => {
-  new AppError(`Can't find ${req.originalUrl} on this server!`, 404);
+  res.status(404).send(`Can't find ${req.originalUrl} on this server!`);
 });
 
-// Export the app to be used by the server
 module.exports = app;
